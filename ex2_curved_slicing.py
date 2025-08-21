@@ -21,6 +21,7 @@ from optimizing_offset_value import optimizing_offset_value
 from interpolation_slicer_dart import InterpolationSlicer_Dart,simplify_paths_rdp_with_gr,seams_smooth_with_gr
 from compas.geometry import Line
 from distances import print_list_with_details,cube_distances,get_close_mesh,save_nested_list
+from Target_finding import Target_finder
 import copy
 import pymsgbox
 from gradient_optimization import GradientOptimization
@@ -39,16 +40,16 @@ OBJ_INPUT_NAME = os.path.join(DATA_PATH, 'mesh.obj')
 def main():
     start_time = time.time()
     avg_layer_height = 10
+    
+        
+
     try:
         
         mesh = Mesh.from_obj(os.path.join(OUTPUT_PATH,"edited_mesh.obj"))  
         print("old mesh")
-        low_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryLOW.json')
-        high_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryHIGH.json')
-        create_mesh_boundary_attributes(mesh, low_boundary_vs, high_boundary_vs)  
+         
     except:
         print("new mesh")
-        raise Exception("mesh not found")
         # --- Load initial_mesh
         mesh = Mesh.from_obj(os.path.join(DATA_PATH, OBJ_INPUT_NAME))
 
@@ -63,8 +64,10 @@ def main():
 
         # print(mesh.vertex_attribute(key=6615, name="z"))
         # This part is add by Yichuan
-
-        change_mesh_shape(mesh,-1)
+        from mesh_changing import mesh_refiner
+        m_r = mesh_refiner(mesh,0)
+        m_r.change_mesh_shape()
+       
 
         # print(mesh.vertex_attribute(key=6615, name="z"))
         obj_writer = OBJWriter(filepath= os.path.join(OUTPUT_PATH, "edited_mesh.obj"), meshes=[mesh])
@@ -74,6 +77,17 @@ def main():
         high_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryHIGH.json')
         create_mesh_boundary_attributes(mesh, low_boundary_vs, high_boundary_vs) 
         # end
+    
+    try:
+        print('manual set target')
+        low_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryLOW.json')
+        high_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryHIGH.json')
+        create_mesh_boundary_attributes(mesh, low_boundary_vs, high_boundary_vs) 
+    except:
+        print('auto set target')
+        T_f = Target_finder(mesh)
+        high_boundary_vs,low_boundary_vs = T_f.output() 
+    
     parameters = {
         'avg_layer_height': avg_layer_height,  # controls number of curves that will be generated
     }
@@ -152,8 +166,7 @@ def slice(OUTPUT_PATH,mesh:Mesh,preprocessor:DartPreprocesssor,g_eval_height:Gra
     """
     saddles=g_eval_height.saddles
     print('slice start'+str(animation_frame)+'_________________________')
-    # preprocessor.target_HIGH.compute_not_flip_geodesic_distances(derection=False)
-    # preprocessor.target_LOW.compute_not_flip_geodesic_distances(derection=True)  
+     
     if way=='up' or way=='down':
         single_side=True
     else:
