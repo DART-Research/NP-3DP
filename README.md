@@ -17,10 +17,10 @@ for example:
     │── ex2_curved_slicing.py
     │── curved_slicing_master.gh
     │── ...
-    │── ex1/                 # Example input folder (must be created manually)
+    │── beam1A/                 # Example input folder (must be created manually)
     │     └── mesh.obj       # OBJ file to be sliced
 
-You can create multiple input folders (e.g., `ex2`, `ex3`) and place
+You can create multiple input folders (e.g., `beam1B`, `beam1C`) and place
 your `.obj` file inside, but the file name must be:
 
     mesh.obj
@@ -53,7 +53,7 @@ pip install pymsgbox
 ## ▶️ Usage
 
 1.  **Prepare the model file**\
-    Create a new folder (e.g., `ex1`) in the project root and place your
+    Create a new folder (e.g., `beam1A`) in the project root and place your
     OBJ file inside, named as:
 
         ex1/mesh.obj
@@ -63,7 +63,7 @@ pip install pymsgbox
     and update the following parameters:
 
     ``` python
-    input_folder_name = 'ex1'   # Must match the folder name
+    input_folder_name = 'beam1A'   # Must match the folder name
     avg_layer_height = 10       # Set layer height
     ```
 
@@ -80,8 +80,8 @@ pip install pymsgbox
 -   Make sure `Rhino 7.0` is installed (required by `compas_rhino`).\
 -   The OBJ file must be a triangular mesh and must be named exactly
     `mesh.obj`.\
--   For testing different models, create separate folders (e.g., `ex2`,
-    `ex3`) and update `input_folder_name` accordingly.
+-   For testing different models, create separate folders (e.g., `beam1B`,
+    `beam1C`) and update `input_folder_name` accordingly.
 
 ------------------------------------------------------------------------
 
@@ -91,7 +91,7 @@ For visualization, use the `curved_slicing_master.gh` file:
 
 1.  Open `curved_slicing_master.gh`.\
 2.  Make sure the `folder_name` inside matches the one you set earlier
-    in `curved_slicing.py` (e.g., `ex1`).\
+    in `curved_slicing.py` (e.g., `beam1A`).\
 ![Visualization in Rhino](./image1.png)\
 *Folder name setting in Grasshopper*
 3.  After running, you can use the **Rhino interface** to view the slicing result.\
