@@ -12,7 +12,7 @@ class Target_finder:
         """
         self.find()
         self.separate_high_and_low()
-        create_mesh_boundary_attributes(self.mesh,self.low_boundary_vs,self.high_boundary_vs)
+        create_mesh_boundary_attributes(self.mesh,[v for c in self.low_boundary_vs for v in c],[v for c in self.high_boundary_vs for v in c])
         return self.high_boundary_vs,self.low_boundary_vs
     
     def find(self):

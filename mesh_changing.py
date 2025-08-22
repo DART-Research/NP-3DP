@@ -1017,38 +1017,10 @@ def get_boundary_vs(mesh:Mesh):
         if None in faces:
             naked.update(edge)
             #print(edge,mesh.edge_faces(edge[0],edge[1]))
+    from Target_finding import group_connected_elements
     cluster_vs=group_connected_elements(naked,list(mesh.edges()))
     return cluster_vs
-def group_connected_elements(nums, pairs):
-    from collections import defaultdict
-    # 初始化并查集
-    parent = {}
-    
-    def find(x):
-        if x not in parent:
-            parent[x] = x
-        while parent[x] != x:
-            parent[x] = parent[parent[x]]  # 路径压缩
-            x = parent[x]
-        return x
-    
-    def union(x, y):
-        root_x = find(x)
-        root_y = find(y)
-        if root_x != root_y:
-            parent[root_y] = root_x
-    
-    # 处理所有对，建立连通关系
-    for a, b in pairs:
-        union(a, b)
-    
-    # 将数字分组
-    groups = defaultdict(list)
-    for num in nums:
-        root = find(num)
-        groups[root].append(num)
-    
-    return list(groups.values())
+
 def main():
 
     input_folder_name='beam_testprint'#'beam_new''min1''beam1B''whole''example_jun_bg''data_Y_shape' 'data_vase''data_costa_surface''data_Y_shape_o''data_vase_o''data_costa_surface_o''Jun_ab_testmultipipe'
@@ -1091,6 +1063,7 @@ def main():
             print(low_boundary_vs)
 
     create_mesh_boundary_attributes(mesh, low_boundary_vs, high_boundary_vs)  
+    from Target_finding import group_connected_elements
     cluster_vs = group_connected_elements(low_boundary_vs, list(mesh.edges()))
 
     for vi in mesh.vertices():

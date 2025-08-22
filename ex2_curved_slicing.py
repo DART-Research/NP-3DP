@@ -5,7 +5,6 @@ import compas_slicer.utilities as utils
 from compas_slicer.slicers import InterpolationSlicer
 from gradient_evaluation_dart import GradientEvaluation
 from compas_slicer.post_processing import simplify_paths_rdp
-#from compas_slicer.pre_processing import InterpolationSlicingPreprocessor
 from compas_slicer.print_organization import set_extruder_toggle, set_linear_velocity_by_range
 from compas_slicer.print_organization import add_safety_printpoints
 from compas_slicer.pre_processing import create_mesh_boundary_attributes
@@ -14,7 +13,6 @@ from compas_slicer.post_processing import seams_smooth
 from compas_slicer.print_organization import smooth_printpoints_up_vectors, smooth_printpoints_layer_heights
 import time
 from interpolationdart import DartPreprocesssor
-#from mesh_changing import change_mesh_shape
 from compas.files import OBJWriter
 from mesh_cutting import mesh_cutter
 from optimizing_offset_value import optimizing_offset_value
@@ -31,8 +29,7 @@ logger = logging.getLogger('logger')
 logging.basicConfig(format='%(levelname)s - %(message)s', level=logging.INFO)
 
 
-input_folder_name='beam3B'#'MNNaCl1''Jul_ai''whole''beam1B''csch2''example_jun_bg''data_Y_shape' 'data_vase''data_costa_surface''data_Y_shape_o''data_vase_o''data_costa_surface_o''Jun_ab_testmultipipe'
-#'Jun_ah_testb''Jul_h''Jul_I''Jul_ab''Jul_ah''Jul_ba''table_1''Aug_ac_ex''Aug_bg''Aug_bh''example_jun_bg''table_2'
+input_folder_name='beam1B'
 DATA_PATH = os.path.join(os.path.dirname(__file__), input_folder_name)
 OUTPUT_PATH = utils.get_output_directory(DATA_PATH)
 OBJ_INPUT_NAME = os.path.join(DATA_PATH, 'mesh.obj')
@@ -50,32 +47,31 @@ def main():
          
     except:
         print("new mesh")
-        # --- Load initial_mesh
         mesh = Mesh.from_obj(os.path.join(DATA_PATH, OBJ_INPUT_NAME))
-
-
-
-
-        # --- Load targets (boundaries)
-        low_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryLOW.json')
-        high_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryHIGH.json')
-        
-        create_mesh_boundary_attributes(mesh, low_boundary_vs, high_boundary_vs)
-
-        # print(mesh.vertex_attribute(key=6615, name="z"))
-        # This part is add by Yichuan
+        try:
+            print('manual set target')
+            low_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryLOW.json')
+            high_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryHIGH.json')
+            create_mesh_boundary_attributes(mesh, low_boundary_vs, high_boundary_vs) 
+        except:
+            print('auto set target')
+            T_f = Target_finder(mesh)
+            high_boundary_vs,low_boundary_vs = T_f.output() 
         from mesh_changing import mesh_refiner
-        m_r = mesh_refiner(mesh,0)
+        m_r = mesh_refiner(mesh,0.1)
         m_r.change_mesh_shape()
-       
-
-        # print(mesh.vertex_attribute(key=6615, name="z"))
         obj_writer = OBJWriter(filepath= os.path.join(OUTPUT_PATH, "edited_mesh.obj"), meshes=[mesh])
         obj_writer.write()
         mesh= Mesh.from_obj(os.path.join(OUTPUT_PATH,"edited_mesh.obj"))  
-        low_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryLOW.json')
-        high_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryHIGH.json')
-        create_mesh_boundary_attributes(mesh, low_boundary_vs, high_boundary_vs) 
+        try:
+            print('manual set target')
+            low_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryLOW.json')
+            high_boundary_vs = utils.load_from_json(DATA_PATH, 'boundaryHIGH.json')
+            create_mesh_boundary_attributes(mesh, low_boundary_vs, high_boundary_vs) 
+        except:
+            print('auto set target')
+            T_f = Target_finder(mesh)
+            high_boundary_vs,low_boundary_vs = T_f.output() 
         # end
     
     try:
@@ -91,11 +87,6 @@ def main():
     parameters = {
         'avg_layer_height': avg_layer_height,  # controls number of curves that will be generated
     }
-    # for face in mesh.faces():
-    #     vertices=[l_corner[1] for l_corner in mesh.face_corners(fkey=face)]
-    #     ver_coor=[mesh.vertex_coordinates(vertex) for vertex in vertices]
-    #     line=Line(ver_coor[0],ver_coor[1])
-    #     print(face,mesh.face_corners(fkey=face)[0],line.start )
 
     """
     preprocessor = DartPreprocesssor(mesh, parameters, DATA_PATH,False)

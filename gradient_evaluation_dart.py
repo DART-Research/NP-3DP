@@ -151,7 +151,8 @@ class GradientEvaluation_Dart(GradientEvaluation):
                     
                     choose_list.append(v_grad)
                 else:
-                    print("Error1",v_key)   
+                    pass
+                    #print("Error1",v_key)   
 
             except:
                 print("Error",v_key,[mesh.vertex_faces(v_key)],[mesh.face_area(f_key) for f_key in mesh.vertex_faces(v_key)])
@@ -322,7 +323,8 @@ class GradientEvaluation_Dart(GradientEvaluation):
                             if abs(v - current_vi) > 0.0:
                                 values.append(current_vi - v)
                             else:
-                                print('error',vkey)
+                                pass
+                                #print('error',vkey)
                         sgc = count_sign_changes(values)
 
                         #print(vkey,sgc)
@@ -344,7 +346,8 @@ class GradientEvaluation_Dart(GradientEvaluation):
                         if abs(v - current_v) > 0.0:
                             values.append(current_v - v)
                         else:
-                            print('error',vkey)
+                            pass
+                            #print('error',vkey)
                     sgc = count_sign_changes(values)
                     
 
@@ -405,7 +408,8 @@ class GradientEvaluation_Dart(GradientEvaluation):
                     if abs(v - current_v) > 0.0:
                         values.append(current_v - v)
                     else:
-                        print('error',vkey)
+                        pass
+                        #print('error',vkey)
                 sgc,max_v,min_v = count_sign_changes_with_vkey(values)
                 max_v = [neighbors[i] for i in max_v]
                 min_v = [neighbors[i] for i in min_v]

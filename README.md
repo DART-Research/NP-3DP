@@ -1,6 +1,8 @@
 # NP-3DP
 
-This project is providing **3D printing slicing and path generation** with Python.\
+This project is based on
+[DART-Research/NP-3DP](https://github.com/DART-Research/NP-3DP),
+providing **3D printing slicing and path generation** with Python.\
 By modifying input files and parameters, you can perform slicing and
 curved slicing experiments for different models.
 
@@ -13,7 +15,7 @@ for example:
 
     NP-3DP/
     │── ex2_curved_slicing.py
-    │── Target_finding.py
+    │── curved_slicing_master.gh
     │── ...
     │── ex1/                 # Example input folder (must be created manually)
     │     └── mesh.obj       # OBJ file to be sliced
@@ -68,7 +70,7 @@ pip install pymsgbox
 3.  **Run the script**
 
     ``` bash
-    python curved_slicing.py
+    ex2_curved_slicing.py
     ```
 
 ------------------------------------------------------------------------
@@ -80,3 +82,26 @@ pip install pymsgbox
     `mesh.obj`.\
 -   For testing different models, create separate folders (e.g., `ex2`,
     `ex3`) and update `input_folder_name` accordingly.
+
+------------------------------------------------------------------------
+
+## 👀 Visualization
+
+For visualization, use the `curved_slicing_master.gh` file:
+
+1.  Open `curved_slicing_master.gh`.\
+2.  Make sure the `folder_name` inside matches the one you set earlier
+    in `curved_slicing.py` (e.g., `ex1`).\
+![Visualization in Rhino](./image1.png)\
+*Folder name setting in Grasshopper*
+3.  After running, you can use the **Rhino interface** to view the slicing result.\
+![Editing Interface](./image3.png)\
+![Editing Interface](./image4.png)\
+*Editing in Rhino/Grasshopper*
+4.  At the same time, you can use **Grasshopper** to view all
+    `layer_height` data.
+
+    ![Layer height data](./image2.png)\
+*Layer height data visualization in Grasshopper*
+
+
