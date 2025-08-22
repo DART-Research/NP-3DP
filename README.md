@@ -1,8 +1,6 @@
 # NP-3DP
 
-This project is based on
-[DART-Research/NP-3DP](https://github.com/DART-Research/NP-3DP),
-providing **3D printing slicing and path generation** with Python.\
+This project is providing **3D printing slicing and path generation** with Python.\
 By modifying input files and parameters, you can perform slicing and
 curved slicing experiments for different models.
 
@@ -14,8 +12,8 @@ Download all Python files from the repository into the same directory,
 for example:
 
     NP-3DP/
-    │── curved_slicing.py
-    │── utils.py
+    │── ex2_curved_slicing.py
+    │── Target_finding.py
     │── ...
     │── ex1/                 # Example input folder (must be created manually)
     │     └── mesh.obj       # OBJ file to be sliced
