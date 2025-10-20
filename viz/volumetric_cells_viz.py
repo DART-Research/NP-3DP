@@ -1,4 +1,7 @@
-"""Visualization helpers for volumetric slice cells."""
+"""Visualization helpers for volumetric slice cells.
+
+Maintainer: Abdallah Kamhawi (PhD researcher, DART Laboratory; Kamhawi@umich.edu)
+"""
 
 from __future__ import annotations
 
@@ -264,3 +267,4 @@ __all__ = [
     "visualize_volumetric_structure",
     "visualize_volumetric_metric_on_mesh",
 ]
+
