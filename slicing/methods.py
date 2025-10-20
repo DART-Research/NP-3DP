@@ -1,4 +1,7 @@
-"""Reusable slicing method wrappers for benchmarking comparisons."""
+"""Reusable slicing method wrappers for benchmarking comparisons.
+
+Maintainer: Abdallah Kamhawi (PhD researcher, DART Laboratory; Kamhawi@umich.edu)
+"""
 
 from __future__ import annotations
 
@@ -322,3 +325,4 @@ __all__ = [
     "run_method_from_config",
     "METHOD_REGISTRY",
 ]
+
