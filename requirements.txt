@@ -1,0 +1,19 @@
+# Core numerical and graph tooling
+numpy
+scipy
+networkx
+tqdm
+
+# Mesh IO, geometry, and visualization
+trimesh
+pyvista
+plotly
+matplotlib
+
+# Data analysis and plotting helpers
+pandas
+seaborn
+
+# Configuration / optional accelerators
+pyyaml
+numba
