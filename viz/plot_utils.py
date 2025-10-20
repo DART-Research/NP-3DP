@@ -1,4 +1,7 @@
-"""Shared Plotly helpers resilient to transient browser disconnects."""
+"""Shared Plotly helpers resilient to transient browser disconnects.
+
+Maintainer: Abdallah Kamhawi (PhD researcher, DART Laboratory; Kamhawi@umich.edu)
+"""
 
 from __future__ import annotations
 
@@ -22,3 +25,4 @@ def guard_connection_reset(action: Callable[[], None], *, context: str) -> None:
             print(f"[viz] Ignore connection reset during {context}: {err}")
             return
         raise
+
