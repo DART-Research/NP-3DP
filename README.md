@@ -89,16 +89,6 @@ The demo loads an example OBJ, builds the slicing graph, detects saddles, constr
 - Graph nodes store `pos`, `node_type` ∈ {boundary, intra}, `boundary_number`, `boundary_side`, nearest-side ids and distances, `morse_index` ∈ {−1,0,1,2}, `critical_type`, optional `critical_confidence`, and `conforming_scalar`.
 - Graph edges store `weight`, `edge_type` ∈ {internal, boundary}, `boundary_number`, and `boundary_side`.
 
-**Reproducibility and Configuration**
-- Slicer defaults (`slicer_defaults.yaml`)
-  - `boundaries`: `axis`, `side_tol`, `assign_middle_to_nearest`, `overwrite`.
-  - `critical_points`: smoothing, adaptive ε, multi-scale consensus, confidence, geodesic clipping (`clip_saddles_geodesic_threshold`, `clip_saddles_strategy`), persistence threshold.
-  - `scalar_field`: `axis_for_boundary`, optional `radii_per_saddle`, exponent `n`, blend `eps`.
-  - `iso_slices`: `layer_height`, `dr_clip`, `controller_blend`, `dedupe_decimals`, `min_component_points`, `edge_tol`, `samples`, `degree`, `periodic`, `include_end`, `max_levels`.
-- Visualization defaults (`viz_defaults.yaml`)
-  - Camera, colorscales, axes visibility, output filenames and I/O policy (`save_html`, `auto_open`).
-- Environment variables
-  - `SLICER_DEFAULTS_YAML` and `VIZ_DEFAULTS_YAML` can point to project-specific YAML overrides.
 
 **Pseudocode (High Level)**
 - Load mesh → build G
