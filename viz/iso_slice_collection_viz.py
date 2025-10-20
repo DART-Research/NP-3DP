@@ -1,4 +1,7 @@
-﻿"""Plotly-based helpers for visualising iso-slice collections."""
+﻿"""Plotly-based helpers for visualising iso-slice collections.
+
+ Maintainer: Abdallah Kamhawi (PhD researcher, DART Laboratory; Kamhawi@umich.edu)
+ """
 
 from __future__ import annotations
 
@@ -220,3 +223,4 @@ def visualize_slices(
 
     _handle_output(fig, save_html=save_html, auto_open=auto_open, filepath=filepath)
     return fig
+
