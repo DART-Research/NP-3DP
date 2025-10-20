@@ -85,7 +85,7 @@ The demo loads an example OBJ, builds the slicing graph, detects saddles, constr
 - Adaptive spacing
   - Controller blends uniform coverage of [0,1] with local gradient pacing to approximate a physical layer height under the mesh’s scalar variation.
 
-##Data Structures and Annotations
+## Data Structures and Annotations
 - Graph nodes store `pos`, `node_type` ∈ {boundary, intra}, `boundary_number`, `boundary_side`, nearest-side ids and distances, `morse_index` ∈ {−1,0,1,2}, `critical_type`, optional `critical_confidence`, and `conforming_scalar`.
 - Graph edges store `weight`, `edge_type` ∈ {internal, boundary}, `boundary_number`, and `boundary_side`.
 
