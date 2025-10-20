@@ -1,4 +1,7 @@
-"""JSON export for per-vertex scalar fields."""
+"""JSON export for per-vertex scalar fields.
+
+Maintainer: Abdallah Kamhawi (PhD researcher, DART Laboratory; Kamhawi@umich.edu)
+"""
 
 from __future__ import annotations
 
