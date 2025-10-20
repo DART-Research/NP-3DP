@@ -1,4 +1,7 @@
-"""JSON exporters for slicing outputs."""
+"""JSON exporters for slicing outputs.
+
+Maintainer: Abdallah Kamhawi (PhD researcher, DART Laboratory; Kamhawi@umich.edu)
+"""
 
 from __future__ import annotations
 
@@ -271,3 +274,4 @@ def _array_to_lists(arr: np.ndarray) -> List[List[float]]:
 
 def _vector_to_list(vec: np.ndarray) -> List[float]:
     return [float(v) for v in np.asarray(vec, dtype=float).tolist()]
+
