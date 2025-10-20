@@ -1,4 +1,7 @@
-"""Shared helpers for reproducing the default slicing pipeline."""
+"""Shared helpers for reproducing the default slicing pipeline.
+
+Maintainer: Abdallah Kamhawi (PhD researcher, DART Laboratory; Kamhawi@umich.edu)
+"""
 
 from __future__ import annotations
 
@@ -161,3 +164,4 @@ def extract_iso_slices_from_defaults(
     if return_mesh:
         return slices, mesh
     return slices
+
